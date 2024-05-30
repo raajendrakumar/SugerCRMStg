@@ -1,3 +1,4 @@
+
 package Ciber_PIC_Automation.Captiv;
 
 import java.awt.AWTException;
@@ -9,6 +10,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import org.testng.annotations.Test;
 import org.apache.log4j.Logger;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -80,7 +82,8 @@ public class AppTest {
 	public static final String pcsvbtn = "//a[@class='btn btn-primary']";
 	public static final String capNameSearch = "div#select2-drop>div>input";
 	public static final String crsubname = "/html/body/div[1]/div/div[3]/div/div/div[1]/div[3]/div[2]/div[2]/div[7]/ul/li/div[1]/div[1]";
-	public static final String nwpr = "/html/body/div[1]/div/div[3]/div/div/div[1]/div[3]/div[2]/div[2]/div[7]/ul/li/div[1]/div[1]";
+	public static final String altw = "//*[@id='alerts']";
+	public static final String nwpr = "/html/body/div[1]/div/div[1]/div/div/span/a";
 	public static final String PhyStreet = "2142 S Main St";
 	public static final String PhyCity = "Bangalore";
 	public static final String PhyState = "KA";
@@ -251,17 +254,18 @@ public class AppTest {
 		actions.moveToElement(pcsv).click().perform();
 		Thread.sleep(3000);
 
+		Alert prAlert = driver.switchTo().alert();
+		prAlert.dismiss();
+
 		WebElement scroll = driver.findElement(By.xpath(cprelscl));
 		// Scrolling down the page till the element is found
 		js.executeScript("arguments[0].scrollIntoView();", scroll);
 		WebElement crsbnm = driver.findElement(By.xpath(cprelscl));
 		crsbnm.click();
 		Thread.sleep(2000);
-
 		WebElement newpr = driver.findElement(By.id(nwpr));
-		newpr.getText();
+		actions.moveToElement(newpr).click().perform();
 		System.out.println("Printing " + nwpr);
-
 	}
 
 	public static WebDriver startBrowser(String browserName) throws UnknownHostException {

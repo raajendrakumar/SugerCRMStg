@@ -8,7 +8,11 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import org.testng.annotations.Test;
+
+import Ciber_PIC_Automation.Captiv.MPSUPropertyFileRead;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -36,12 +40,13 @@ public class CreateProspect {
 
 	public static final String prsch = "//input[@name='$PpyDisplayHarness$ppySearchText']";
 	public static final String home = "//ul[contains(@class,'headerTabsList Temporary_top_tabsList')]//li[@id='Tab1']//span[@id='TABSPAN']";
-	public static final String ovr = "//a[contains(text(),'Overview (Generate Pricing)')]";
+	public static final String ovr = "/html[1]/body[1]/div[2]/form[1]/div[3]/div[2]/section[1]/div[1]/span[2]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/span[1]/div[1]/span[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/a[1]";
 	public static final String prschicn = "//div[contains(@class,'content layout-content-inline')]";
 	public static final String prtsch = "//span[text()='Search']";
 	public static final String print = "//span[@class='primary_search_white']//input[1]";
 	public static final String casetype = "//select[@class='standard']";
-
+	public static final String adloc = "//a[contains(@title,'Add a row ')]";
+	public static final String adloc1 = "//input[contains(@validationtype,'datetime,required')]";
 	public static final String username = "Samrat_QA";
 	public static final String password = "rules";
 	public static final String caStatus = "Regularisation of casual workers";
@@ -78,24 +83,26 @@ public class CreateProspect {
 		rb.keyPress(KeyEvent.VK_ENTER);
 		rb.keyRelease(KeyEvent.VK_ENTER);
 		Thread.sleep(3000);
-		WebDriverWait wait = new WebDriverWait(driver, 10); // 10-second explicit wait
+
+		driver.switchTo().frame(0);
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+
 		try {
 
-			// Wait until the element is present and visible
-			WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ovr)));
+			WebElement element = wait
+					.until(ExpectedConditions.visibilityOfElementLocated(By.partialLinkText("Overview")));
 
-			// Perform actions on the element
 			element.click();
 		} catch (NoSuchElementException e) {
 			System.out.println("Element not found: " + e.getMessage());
 		} finally {
-			//driver.quit();
 		}
 
-		/*
-		 * WebElement ovw = driver.findElement(By.xpath(ovr));
-		 * actions.moveToElement(ovw).click().perform();
-		 */
+		WebElement element1 = driver.findElement(By.xpath(adloc1));
+		insertTextIntoTextField(element1, MPSUPropertyFileRead.FileRead("ProjectData.properties", "EffectiveDateS"));
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("arguments[0].scrollIntoView();", element1);
+
 	}
 
 	public static WebDriver startBrowser(String browserName) throws UnknownHostException {
