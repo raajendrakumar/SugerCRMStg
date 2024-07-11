@@ -10,16 +10,13 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import org.testng.annotations.Test;
 import org.apache.log4j.Logger;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
@@ -88,16 +85,16 @@ public class AppTest {
 	public static final String PhyCity = "Bangalore";
 	public static final String PhyState = "KA";
 	public static final String PhyPostcode = "560060";
-	public static final String username = "aanjuru";
+	public static final String username = "aanjuru"; 
 	public static final String password = "@Pegatesting7";
 	public static final String rcsub = "01/09/2022";
-	public static final String efdt = "05/20/2022";
+	public static final String efdt = "07/01/2022";
 	public static String company = null;
 	public static String submissionName = null;
 
 	@Test
 	public static void createOrganization() throws UnknownHostException, InterruptedException, AWTException {
-		JavascriptExecutor js = (JavascriptExecutor) driver;
+
 		startBrowser("firefox");
 		driver.manage().window().maximize();
 
@@ -253,21 +250,20 @@ public class AppTest {
 		WebElement pcsv = driver.findElement(By.xpath(pcsvbtn));
 		actions.moveToElement(pcsv).click().perform();
 		Thread.sleep(3000);
-
-		Alert prAlert = driver.switchTo().alert();
-		prAlert.dismiss();
-
-		WebElement scroll = driver.findElement(By.xpath(cprelscl));
-		// Scrolling down the page till the element is found
-		js.executeScript("arguments[0].scrollIntoView();", scroll);
-		WebElement crsbnm = driver.findElement(By.xpath(cprelscl));
-		crsbnm.click();
-		Thread.sleep(2000);
-		WebElement newpr = driver.findElement(By.id(nwpr));
-		actions.moveToElement(newpr).click().perform();
-		System.out.println("Printing " + nwpr);
+		/*
+		 * Alert prAlert = driver.switchTo().alert(); prAlert.dismiss();
+		 * 
+		 * WebElement scroll = driver.findElement(By.xpath(cprelscl)); // Scrolling down
+		 * the page till the element is found
+		 * js.executeScript("arguments[0].scrollIntoView();", scroll); WebElement crsbnm
+		 * = driver.findElement(By.xpath(cprelscl)); crsbnm.click(); Thread.sleep(2000);
+		 * WebElement newpr = driver.findElement(By.id(nwpr));
+		 * actions.moveToElement(newpr).click().perform();
+		 * System.out.println("Printing " + nwpr);
+		 */
 	}
 
+	@SuppressWarnings("deprecation")
 	public static WebDriver startBrowser(String browserName) throws UnknownHostException {
 
 		if (browserName.equalsIgnoreCase("firefox")) {
@@ -298,11 +294,6 @@ public class AppTest {
 		driver.manage().window().maximize();
 		return driver;
 
-	}
-
-	private static FirefoxOptions FirefoxOptions() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	public static void insertTextIntoTextField(WebElement webElement, String inputText) {
