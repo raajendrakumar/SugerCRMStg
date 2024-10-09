@@ -9,6 +9,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import org.testng.annotations.Test;
+
+import DevStudioStg_Automation.MPSUPropertyFileRead;
+
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -22,7 +25,6 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class AppTest {
 	private static String UTILS = "Utils";
@@ -131,12 +133,6 @@ public class AppTest {
 		WebElement org = driver.findElement(By.xpath(orgbtn));
 		org.click();
 		Thread.sleep(3000);
-
-		/*
-		 * Action crorgplus =
-		 * actions.sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ENTER).build();
-		 * crorgplus.perform(); Thread.sleep(2000);
-		 */
 
 		WebElement crtorg = driver.findElement(By.xpath(crorg));
 		crtorg.click();
