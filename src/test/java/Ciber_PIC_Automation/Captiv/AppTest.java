@@ -16,11 +16,13 @@ import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class AppTest {
 	private static String UTILS = "Utils";
@@ -33,23 +35,30 @@ public class AppTest {
 	public static final String usernametxtfld = "//input[@name='username']";
 	public static final String passwordfld = "//input[@name='password']";
 	public static final String signinbtn = "//a[@name='login_button']";
-	public static final String orgbtn = "//button[@aria-label='Organizations - More']//i[@class='fa fa-caret-down']";
-	public static final String viworgdrpdn = "/html/body/div[1]/div/div[2]/div/div/div/div[1]/ul/li[2]/span/div/ul/li[2]/a";
+	public static final String orgbtn = "//button[@aria-label='Organizations - More']/i[@class='fa fa-caret-down']";
+	public static final String crorg = "//*[contains(text(),'Create Organization')]";
+	public static final String viworgdrpdn = "//a[contains(text(),'View Organizations')]";
 	public static final String orglkck = "/html[1]/body[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[2]/div[2]/div[2]/div[3]/div[1]/table[1]/tbody[1]/tr[1]/td[2]/span[1]/div[1]";
 	public static final String prostr = "/html/body/div[1]/div/div[5]/div/div/div[1]/div[1]/div/div[3]/div/div/div[1]/div[2]/div[1]/span/span/div";
 	public static final String capexerd = "//input[@name='Users_select'][contains(@id,'57ded0d3-b6b7-0a51-c584-54df66fde781')]";
-	public static final String crorgdrpdn = "/html[1]/body[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/ul[1]/li[2]/span[1]/button[1]";
-	public static final String companyName = "/html/body/div[1]/div/div[5]/div/div/div[1]/div[1]/div/div[1]/h1/span[2]/span/span[2]/span/input";
-	public static final String PhyStreetfld = "//textarea[@placeholder='(Required) Physical Street']";
-	public static final String PhyCityfld = "//input[@placeholder='(Required) Physical City']";
+	public static final String crorgdrpdn = "//button[@aria-label='Organizations - More']//i[@class='fa fa-caret-down']";
+	public static final String companyName = "//span[contains(text(),'Company Name')]/following::input[@name='name']";
+	public static final String PhyStreetfld = "//textarea[@name='billing_address_street']";
+	public static final String PhyCityfld = "//input[@name='billing_address_city']";
 	public static final String PhyStatefld = "//input[@name='billing_address_state']";
-	public static final String PhyPostcodefld = "//input[@placeholder='(Required) Physical Postal Code']";
-	public static final String savebtn = "//a[@class='btn btn-primary']";
-	public static final String subarw = "/html/body/div[1]/div/div[2]/div/div/div/div[1]/ul/li[5]/span/button/i";
+	public static final String PhyPostcodefld = "//input[@name='billing_address_postalcode']";
+	public static final String MailingStreetfld = "//input[@name='shipping_address_city']";
+	public static final String MailingCityfld = "//input[@name='billing_address_state']";
+	public static final String MailingStatefld = "//input[@name='billing_address_state']";
+	public static final String MailingPostcodefld = "//input[@name='shipping_address_postalcode']";
+
+	public static final String savebtn = "//a[@class='btn btn-primary' and @name='save_button' and contains(text(), 'Save')]";
+	public static final String subarw = "//button[@aria-label='Submissions - More']//i[@class='fa fa-caret-down']";
 	public static final String sublnk = "//li[@class='subpanel clearfix empty']//a[@name='create_button']";
 	public static final String subTab = "//button[@aria-label='Organizations - More']//i[@class='fa fa-caret-down']";
-	public static final String waralt = "/html/body/div[1]/div/div[1]/div/div/button/i";
-	public static final String capName = "/html[1]/body[1]/div[1]/div[1]/div[5]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[4]/div[1]/span[1]/span[1]/div[1]/a[1]/span[1]";
+	public static final String waralt = "//button[@class='close btn btn-link btn-invisible']";
+	public static final String capName = "//div[@class='record-label' and @data-name='tai_captives_opportunities_1_name'][contains(text(),'Captive')]/following-sibling::span[@class='normal index']//a[@class='select2-choice select2-default']/span[@class='select2-chosen']";
+	public static final String orgName = "//div[contains(text(), 'Organization Name')]/following-sibling::span//div[contains(@class, 'select2-container')]/a/child::span[@class='select2-chosen']";
 	public static final String promgr = "/html[1]/body[1]/div[1]/div[1]/div[5]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[5]/div[1]/span[1]/span[1]/div[1]/a[1]/span[1]";
 	public static final String memtyp = "/html[1]/body[1]/div[1]/div[1]/div[5]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[7]/div[1]/span[1]/span[1]/div[1]/a[1]";
 	public static final String brk = "/html[1]/body[1]/div[1]/div[1]/div[5]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[8]/div[1]/span[1]/span[1]/div[1]/a[1]";
@@ -76,31 +85,33 @@ public class AppTest {
 	public static final String subName = "//input[@name='name']";
 	public static final String recSub = "//input[@name='date_received_c']";
 	public static final String effdate = "//input[@name='effective_date_c']";
-	public static final String pcsvbtn = "//a[@class='btn btn-primary']";
-	public static final String capNameSearch = "div#select2-drop>div>input";
+	public static final String pcsvbtn = "//a[@class='btn btn-primary' and @role='button' and @name='save_button']";
+	public static final String reqfldSearch = "//div[@id='select2-drop']//div[@class='select2-search']/descendant::input[@type='text']";
+
 	public static final String crsubname = "/html/body/div[1]/div/div[3]/div/div/div[1]/div[3]/div[2]/div[2]/div[7]/ul/li/div[1]/div[1]";
 	public static final String altw = "//*[@id='alerts']";
 	public static final String nwpr = "/html/body/div[1]/div/div[1]/div/div/span/a";
+
 	public static final String PhyStreet = "2142 S Main St";
 	public static final String PhyCity = "Bangalore";
 	public static final String PhyState = "KA";
 	public static final String PhyPostcode = "560060";
-	public static final String username = "aanjuru"; 
+	public static final String username = "aanjuru";
 	public static final String password = "@Pegatesting7";
-	public static final String rcsub = "01/09/2022";
-	public static final String efdt = "07/01/2022";
+	public static final String rcsub = "01/09/2021";
+	public static final String efdt = "07/01/2021";
 	public static String company = null;
 	public static String submissionName = null;
+	public static final String OrganizationName = "StgTest_";
 
 	@Test
 	public static void createOrganization() throws UnknownHostException, InterruptedException, AWTException {
 
-		startBrowser("firefox");
+		startBrowser("edge");
 		driver.manage().window().maximize();
 
 		String url = "https://sugarstage.captiveresources.com/#";
 		driver.get(url);
-		Thread.sleep(3000);
 
 		Actions actions = new Actions(driver);
 		WebElement cpusername = driver.findElement(By.xpath(usernametxtfld));
@@ -111,21 +122,32 @@ public class AppTest {
 
 		WebElement signin = driver.findElement(By.xpath(signinbtn));
 		signin.click();
+		Thread.sleep(3000);
 
 		WebElement wrwdw = driver.findElement(By.xpath(waralt));
 		wrwdw.click();
+		Thread.sleep(3000);
 
 		WebElement org = driver.findElement(By.xpath(orgbtn));
 		org.click();
 		Thread.sleep(3000);
-		Action crorgplus = actions.sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ENTER).build();
-		crorgplus.perform();
-		Thread.sleep(3000);
-		company = "Testing_WI_" + Timestamp.getTimeStamp();
-		Thread.sleep(3000);
+
+		/*
+		 * Action crorgplus =
+		 * actions.sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ENTER).build();
+		 * crorgplus.perform(); Thread.sleep(2000);
+		 */
+
+		WebElement crtorg = driver.findElement(By.xpath(crorg));
+		crtorg.click();
+		Thread.sleep(2000);
+
+		company = "StgTest_" + Timestamp.getTimeStamp();
+		Thread.sleep(2000);
 		WebElement comyName = driver.findElement(By.xpath(companyName));
 		comyName.sendKeys(company);
-		Thread.sleep(3000);
+		Thread.sleep(2000);
+
 		driver.findElement(By.linkText("Address")).click();
 		Thread.sleep(3000);
 		WebElement PStreet = driver.findElement(By.xpath(PhyStreetfld));
@@ -158,25 +180,25 @@ public class AppTest {
 		crsubm.perform();
 		Thread.sleep(3000);
 
-		submissionName = "Testing_WI_" + Timestamp.getTimeStamp();
+		submissionName = "stgTest_" + Timestamp.getTimeStamp();
 
 		WebElement sbName = driver.findElement(By.xpath(subName));
 		sbName.sendKeys(submissionName);
+		Thread.sleep(2000);
 
 		WebElement prostrfld = driver.findElement(By.xpath(prostr));
 		actions.moveToElement(prostrfld).click().perform();
 		Thread.sleep(3000);
 		Action prostrAction = actions.sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ENTER).build();
 		prostrAction.perform();
-		Thread.sleep(2000);
+		Thread.sleep(4000);
 
 		WebElement captive = driver.findElement(By.xpath(capName));
 		actions.moveToElement(captive).click().perform();
 		Thread.sleep(3000);
-		WebElement cpnmsearch = driver.findElement(By.cssSelector(capNameSearch));
-		cpnmsearch.click();
+		WebElement cpnmsearch = driver.findElement(By.xpath(reqfldSearch));
 		insertTextIntoTextField(cpnmsearch, MPSUPropertyFileRead.FileRead("ProjectData.properties", "Captive"));
-		Thread.sleep(3000);
+		Thread.sleep(2000);
 		Robot rb = new Robot();
 		rb.keyPress(KeyEvent.VK_ENTER);
 		rb.keyRelease(KeyEvent.VK_ENTER);
@@ -185,7 +207,7 @@ public class AppTest {
 		WebElement promgrfld = driver.findElement(By.xpath(promgr));
 		actions.moveToElement(promgrfld).click().perform();
 		Thread.sleep(3000);
-		WebElement pmsearch = driver.findElement(By.cssSelector(capNameSearch));
+		WebElement pmsearch = driver.findElement(By.xpath(reqfldSearch));
 		pmsearch.click();
 		Thread.sleep(3000);
 		insertTextIntoTextField(pmsearch, MPSUPropertyFileRead.FileRead("ProjectData.properties", "ProgramManager"));
@@ -215,30 +237,29 @@ public class AppTest {
 		WebElement capexefld = driver.findElement(By.xpath(capexe));
 		actions.moveToElement(capexefld).click().perform();
 		Thread.sleep(3000);
-		WebElement capexesearch = driver.findElement(By.xpath(brkSearch));
-		capexesearch.click();
-		WebElement capexeserh = driver.findElement(By.xpath(capexeFilt));
-		capexeserh.click();
-		insertTextIntoTextField(capexeserh,
-				MPSUPropertyFileRead.FileRead("ProjectData.properties", "CaptiveExecutive"));
+
+		WebElement capexesch = driver.findElement(By.xpath(reqfldSearch));
+		capexesch.click();
 		Thread.sleep(3000);
-		WebElement capexeSch = driver.findElement(By.xpath(capexerd));
-		capexeSch.click();
+		insertTextIntoTextField(capexesch, MPSUPropertyFileRead.FileRead("ProjectData.properties", "CaptiveExecutive"));
 		Thread.sleep(3000);
+		rb.keyPress(KeyEvent.VK_ENTER);
+		rb.keyRelease(KeyEvent.VK_ENTER);
+		Thread.sleep(2000);
 
 		WebElement procorfld = driver.findElement(By.xpath(procor));
 		actions.moveToElement(procorfld).click().perform();
 		Thread.sleep(3000);
-		WebElement procorsearch = driver.findElement(By.xpath(brkSearch));
-		procorsearch.click();
-		WebElement procorserh = driver.findElement(By.xpath(procorSearch));
-		procorserh.click();
-		insertTextIntoTextField(procorserh,
+
+		WebElement procorsrc = driver.findElement(By.xpath(reqfldSearch));
+		procorsrc.click();
+		Thread.sleep(3000);
+		insertTextIntoTextField(procorsrc,
 				MPSUPropertyFileRead.FileRead("ProjectData.properties", "ProgramCoordinator"));
 		Thread.sleep(3000);
-		WebElement pradsch = driver.findElement(By.xpath(procorrad));
-		pradsch.click();
-		Thread.sleep(3000);
+		rb.keyPress(KeyEvent.VK_ENTER);
+		rb.keyRelease(KeyEvent.VK_ENTER);
+		Thread.sleep(2000);
 
 		WebElement efdte = driver.findElement(By.xpath(effdate));
 		efdte.sendKeys(efdt);
@@ -247,23 +268,23 @@ public class AppTest {
 		prdte.sendKeys(efdt);
 		Thread.sleep(3000);
 
+		WebElement orgnamedd = driver.findElement(By.xpath(orgName));
+		actions.moveToElement(orgnamedd).click().perform();
+		Thread.sleep(2000);
+
+		WebElement orgnm = driver.findElement(By.xpath(reqfldSearch));
+		orgnm.sendKeys(OrganizationName);
+		Thread.sleep(4000);
+		Action OrgNm = actions.sendKeys(Keys.ENTER).build();
+		OrgNm.perform();
+		Thread.sleep(3000);
+
 		WebElement pcsv = driver.findElement(By.xpath(pcsvbtn));
 		actions.moveToElement(pcsv).click().perform();
 		Thread.sleep(3000);
-		/*
-		 * Alert prAlert = driver.switchTo().alert(); prAlert.dismiss();
-		 * 
-		 * WebElement scroll = driver.findElement(By.xpath(cprelscl)); // Scrolling down
-		 * the page till the element is found
-		 * js.executeScript("arguments[0].scrollIntoView();", scroll); WebElement crsbnm
-		 * = driver.findElement(By.xpath(cprelscl)); crsbnm.click(); Thread.sleep(2000);
-		 * WebElement newpr = driver.findElement(By.id(nwpr));
-		 * actions.moveToElement(newpr).click().perform();
-		 * System.out.println("Printing " + nwpr);
-		 */
+
 	}
 
-	@SuppressWarnings("deprecation")
 	public static WebDriver startBrowser(String browserName) throws UnknownHostException {
 
 		if (browserName.equalsIgnoreCase("firefox")) {
@@ -279,6 +300,9 @@ public class AppTest {
 			System.setProperty("webdriver.chrome.driver", UTILS + "\\chromedriver.exe");
 			DesiredCapabilities capabilities = DesiredCapabilities.chrome();
 			driver = new ChromeDriver(capabilities);
+		} else if (browserName.equalsIgnoreCase("edge")) {
+			System.setProperty("webdriver.edge.driver", "C://Docs//Driver//edgedriver.exe");
+			driver = new EdgeDriver();
 		}
 		driver.manage().timeouts().implicitlyWait(defaultBrowserTimeOut, TimeUnit.SECONDS);
 		driver.manage().deleteAllCookies();

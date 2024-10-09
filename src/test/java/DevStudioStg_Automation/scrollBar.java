@@ -12,7 +12,7 @@ public class scrollBar {
 	public void doubleClick() throws InterruptedException {
 		System.setProperty("webdriver.gecko.driver", "C://Docs//Driver//geckodriver.exe");
 		WebDriver driver = new FirefoxDriver();
-		// launch the website
+	
 		driver.get("https://www.geeksforgeeks.org/");
 
 		// Maximize the screen
