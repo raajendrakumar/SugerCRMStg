@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: Ciber_PIC_Automation.Captiv.AppTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 71.22 s <<< FAILURE! -- in Ciber_PIC_Automation.Captiv.AppTest
-Ciber_PIC_Automation.Captiv.AppTest.createOrganization -- Time elapsed: 66.71 s <<< FAILURE!
+Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 66.40 s <<< FAILURE! -- in Ciber_PIC_Automation.Captiv.AppTest
+Ciber_PIC_Automation.Captiv.AppTest.createOrganization -- Time elapsed: 65.88 s <<< FAILURE!
 java.lang.NullPointerException: inStream parameter is null
 	at java.base/java.util.Objects.requireNonNull(Objects.java:233)
 	at java.base/java.util.Properties.load(Properties.java:407)
