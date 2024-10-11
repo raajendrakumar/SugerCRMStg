@@ -162,7 +162,6 @@ public class AppTest {
 		WebElement save = driver.findElement(By.xpath(savebtn));
 		save.click();
 		Thread.sleep(5000);
-
 		WebElement viwog = driver.findElement(By.xpath(orgbtn));
 		viwog.click();
 		Thread.sleep(3000);
