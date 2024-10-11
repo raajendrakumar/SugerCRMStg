@@ -30,8 +30,7 @@ public class AppTest {
 	public static WebDriver driver = null;
 	public static int defaultBrowserTimeOut = 30;
 	public static List<String> windowHandlers;
-	private static String excelFilePath = "C:\\Users\\RajendraKumarBelandu\\Downloads\\Address.xlsx";
-	private static String sheetName = "Address";
+
 	public static Logger logger = Logger.getLogger("LoggerCreation");
 	public static final String usernametxtfld = "//input[@name='username']";
 	public static final String passwordfld = "//input[@name='password']";
