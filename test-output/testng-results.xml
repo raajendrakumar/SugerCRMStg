@@ -2,12 +2,12 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2024-10-11T00:48:49 IST" name="Default suite" finished-at="2024-10-11T00:51:48 IST" duration-ms="179359">
+  <suite started-at="2024-10-12T00:50:22 IST" name="Default suite" finished-at="2024-10-12T00:53:27 IST" duration-ms="184871">
     <groups>
     </groups>
-    <test started-at="2024-10-11T00:48:49 IST" name="Default test" finished-at="2024-10-11T00:51:48 IST" duration-ms="179359">
+    <test started-at="2024-10-12T00:50:22 IST" name="Default test" finished-at="2024-10-12T00:53:27 IST" duration-ms="184871">
       <class name="Ciber_PIC_Automation.Captiv.AppTest">
-        <test-method signature="createOrganization()[pri:0, instance:Ciber_PIC_Automation.Captiv.AppTest@2ddc9a9f]" started-at="2024-10-11T00:48:49 IST" name="createOrganization" finished-at="2024-10-11T00:51:48 IST" duration-ms="179317" status="PASS">
+        <test-method signature="createOrganization()[pri:0, instance:Ciber_PIC_Automation.Captiv.AppTest@368247b9]" started-at="2024-10-12T00:50:22 IST" name="createOrganization" finished-at="2024-10-12T00:53:27 IST" duration-ms="184821" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- createOrganization -->

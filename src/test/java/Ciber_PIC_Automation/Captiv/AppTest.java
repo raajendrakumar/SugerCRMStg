@@ -1,4 +1,3 @@
-
 package Ciber_PIC_Automation.Captiv;
 
 import java.awt.AWTException;
@@ -25,11 +24,14 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 
 public class AppTest {
 	private static String UTILS = "Utils";
+	
 	public static WebElement webelement;
 	public static List<WebElement> webelements = null;
 	public static WebDriver driver = null;
 	public static int defaultBrowserTimeOut = 30;
 	public static List<String> windowHandlers;
+	private static String excelFilePath = "C:\\Users\\RajendraKumarBelandu\\Downloads\\Address.xlsx";
+	private static String sheetName = "Address";
 	public static Logger logger = Logger.getLogger("LoggerCreation");
 	public static final String usernametxtfld = "//input[@name='username']";
 	public static final String passwordfld = "//input[@name='password']";
@@ -102,6 +104,10 @@ public class AppTest {
 	public static String company = null;
 	public static String submissionName = null;
 	public static final String OrganizationName = "StgTest_";
+	public static final String PhyStrt = "5108 Woodmere Dr";
+	public static final String PhyCy = "Bakersfield";
+	public static final String PhySt = "CA";
+	public static final String PhyPost = "93313";
 
 	@Test
 	public static void createOrganization() throws UnknownHostException, InterruptedException, AWTException {
@@ -143,6 +149,7 @@ public class AppTest {
 
 		driver.findElement(By.linkText("Address")).click();
 		Thread.sleep(3000);
+
 		WebElement PStreet = driver.findElement(By.xpath(PhyStreetfld));
 		insertTextIntoTextField(PStreet, MPSUPropertyFileRead.FileRead("ProjectData.properties", "PhyStreet"));
 		WebElement PCity = driver.findElement(By.xpath(PhyCityfld));
