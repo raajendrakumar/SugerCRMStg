@@ -24,7 +24,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 
 public class AppTest {
 	private static String UTILS = "Utils";
-	
+
 	public static WebElement webelement;
 	public static List<WebElement> webelements = null;
 	public static WebDriver driver = null;
@@ -335,4 +335,4 @@ public class AppTest {
 		}
 		return Flag;
 	}
-}
+} 
