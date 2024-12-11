@@ -9,7 +9,7 @@ public class Timestamp {
 	public static String getTimeStamp() {
 	    Date date = Calendar.getInstance().getTime();
 
-	    SimpleDateFormat formatter = new SimpleDateFormat("MMddyyHHmm");
+	    SimpleDateFormat formatter = new SimpleDateFormat("MMddyyHHmmss");
 
 	    return formatter.format(date);
 	}

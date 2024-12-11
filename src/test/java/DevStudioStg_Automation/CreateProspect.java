@@ -11,6 +11,7 @@ import java.util.concurrent.TimeUnit;
 import org.testng.annotations.Test;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -80,11 +81,11 @@ public class CreateProspect {
 	public static final String password = "rules";
 	public static final String caStatus = "Regularisation of casual workers";
 	public static final String addNames = "Private Org";
-	public static final String prid = "PR-273842";
+	public static final String prid = "PR-306838";
 
 	@Test
 	public static void createStgProspect() throws InterruptedException, AWTException, IOException {
-		startBrowser("edge");
+		startBrowser("firefox");
 		driver.manage().window().maximize();
 		String url = "https://captv-stg1.pegacloud.io/prweb/app/PIC/xbHu3hfavxTLkEni2dIEKW87dKzQq6k8*/!STANDARD?pzuiactionrrr=CXtpbn0vMnMwNHlUb0YwMHJldjl3R0t4QUZGVDlJSWFlcnBMYTdkUVUrbHlxazV2MDhtZndDU1FxTDZrTlI2KytTbEpERThZT2t6MnYrbTRMaGU2MXBWVGcvR0NjWVpubC9MbEdHS0RuT0ZyZXp4a21jSUJNZlhtcHo3eTlvallrVS85ZjAzYXdKUVFSK0I1dkExa0Q0aU95OXE1WVNUTEs5U1ZyMkZoYlRtVHlvQ1kwcENVU2JLa3RzaVhCTmU0ZUlDZHlYTldFcXVseGJKTXdXQ3Q3bFp5bWRaUnF5Yzk0YlgwYWZ2WHZhWTBDV0ovQm9TWlZWYTRoTUxyMXNUSnU4Q3BBMXpHUUFtNU9ibWw2dkZhSVplb3BzWU8rakIxK1IxYjIyN2ZkY2x0Mk1FQjgvUE0rME1IMjdJSUNNZUVxa013RWM4V3JldjNoUnNlWm4xWTZWdFdYVStXc0hSeFN6KzFWbUxoelF3NCt3bVhQY09tSDZ0MHVNQjdPU3FCaXhISXZ1L0hhd2QxRE5rUEtNdks2amVkdVlqUjJsd0x5Ti90Q2hFcVVXMmE4aGJmN1kvUkcxSWg5RXcyRjBPTU9EMXJPUDUrYldudlp1Rm9pa3Q5Y2o2bmQycFBWekFreVNGUkVDUWk3YVg0bUVOMEtVUE9rajBQUjhWVXN6eHk2NEgwYlFFRGE0SVNabTl6T1dLK3p3SDRvUmJONHVIdmxBOTZUcTRpTWFiNWlqbkpWKzl0cHJ2eVF2SlowSlk0SUNUbVhLenA4Q244c3dHbmFqMHN2RTV1ZlZubVBPY0o2LzQ1ZU5kSEpJSXJ0RVBEK0U1ZDlINHBOamtRalVJa1BxeGRK*&pzPostData=-1446478408";
 		driver.get(url);
@@ -112,21 +113,27 @@ public class CreateProspect {
 		rb.keyPress(KeyEvent.VK_ENTER);
 		rb.keyRelease(KeyEvent.VK_ENTER);
 		Thread.sleep(3000);
-
+		/*
+		 * WebElement overviewPage =
+		 * driver.findElement(By.xpath("//iframe[@id='PegaGadget1Ifr']"));
+		 * driver.switchTo().frame(overviewPage); overviewPage.getText();
+		 */
 		driver.switchTo().frame(0);
 
 		WebElement ovw = driver.findElement(By.partialLinkText("Overview"));
 		System.out.println("Element with text(): " + ovw.getText());
 		ovw.click();
 
-		Thread.sleep(5000);
-
-		driver.switchTo().frame(0);
-
 		Thread.sleep(3000);
 
+		driver.switchTo().frame(0);
+		Thread.sleep(3000);
 		// selecting coverages
-		driver.findElement(By.xpath(addRow)).click();
+		WebElement addLOB = driver.findElement(By.xpath(addRow));
+
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("arguments[0].click();", addLOB);
+
 		WebElement sel = driver.findElement(By.xpath(selExpGL));
 		Select gen = new Select(sel);
 		gen.selectByValue("General Liability");
@@ -300,7 +307,7 @@ public class CreateProspect {
 	public static WebDriver startBrowser(String browserName) throws UnknownHostException {
 
 		if (browserName.equalsIgnoreCase("firefox")) {
-			System.setProperty("webdriver.gecko.driver", "C://Docs//Driver//geckodriver.exe");
+			System.setProperty("webdriver.gecko.driver", "C:/Docs/Driver/geckodriver.exe");
 			driver = new FirefoxDriver();
 		} else if (browserName.equalsIgnoreCase("edge")) {
 			System.setProperty("webdriver.edge.driver", "C://Docs//Driver//edgedriver.exe");
